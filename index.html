@@ -2,30 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
     <title>SIMPLE</title>
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 <body>
-    <!-- HEADER -->
+    <!-- =========================
+         HEADER
+         ========================= -->
     <header>
-        <a href="index.html" class="logo">
-            <div class="logo-main">SIMPLE</div>
-            <div class="logo-hieroglyph">𓋹𓅓𓊃𓏏𓃭</div>
+        <a
+            href="index.html"
+            class="logo"
+        >
+            <div class="logo-main">
+                SIMPLE
+            </div>
+            <div class="logo-hieroglyph">
+                𓋹𓅓𓊃𓏏𓃭
+            </div>
         </a>
         <nav>
-            <a href="#home">Home</a>
-            <a href="#collection">Collection</a>
-            <a href="#contact">Contact</a>
+            <a href="#home">
+                Home
+            </a>
+            <a href="#collection">
+                Collection
+            </a>
+            <a href="#contact">
+                Contact
+            </a>
         </nav>
         <div class="language">
-            <button type="button">EN</button>
-            <button type="button">AR</button>
+            <button type="button">
+                EN
+            </button>
+            <button type="button">
+                AR
+            </button>
         </div>
     </header>
+    <!-- =========================
+         MAIN
+         ========================= -->
     <main>
         <!-- HERO -->
-        <section id="home" class="hero">
+        <section
+            id="home"
+            class="hero"
+        >
             <div class="hero-content">
                 <p class="small-title">
                     SIMPLE COLLECTION
@@ -37,13 +68,21 @@
                 <p class="hero-description">
                     Discover our latest collection.
                 </p>
-                <a href="#collection" class="shop-button">
+                <a
+                    href="#collection"
+                    class="shop-button"
+                >
                     SHOP COLLECTION
                 </a>
             </div>
         </section>
-        <!-- COLLECTION -->
-        <section id="collection" class="collection">
+        <!-- =========================
+             COLLECTION
+             ========================= -->
+        <section
+            id="collection"
+            class="collection"
+        >
             <div class="collection-heading">
                 <p class="collection-small-title">
                     THE COLLECTION
@@ -55,13 +94,18 @@
                     𓂀
                 </span>
             </div>
-            <!-- Products are loaded from products.js -->
-            <div id="products-container"></div>
+            <div
+                id="products-container"
+            ></div>
         </section>
     </main>
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+         ========================= -->
     <footer id="contact">
-        <h2>SIMPLE</h2>
+        <h2>
+            SIMPLE
+        </h2>
         <div class="footer-hieroglyph">
             𓋹𓅓𓊃𓏏𓃭
         </div>
@@ -69,44 +113,97 @@
             Made with simplicity.
         </p>
     </footer>
-    <!-- PRODUCT DATA -->
+    <!-- =========================
+         PRODUCT DATA
+         ========================= -->
     <script src="products.js"></script>
-    <!-- MAIN SCRIPT -->
+    <!-- =========================
+         MAIN SCRIPT
+         ========================= -->
     <script>
-        const container =
-            document.getElementById("products-container");
-        products.forEach(product => {
-            const card =
-                document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
-                <div class="product-image-wrapper">
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
-                        class="product-image"
-                    >
-                </div>
-                <div class="product-card-content">
-                    <div class="product-symbol">
-                        𓂀
-                    </div>
-                    <h3>
-                        ${product.name}
-                    </h3>
-                    <p class="product-price">
-                        ${product.price} EGP
-                    </p>
-                    <a
-                        href="product.html?id=${product.id}"
-                        class="product-order-button"
-                    >
-                        ORDER NOW
-                    </a>
-                </div>
-            `;
-            container.appendChild(card);
-        });
+        async function displayProducts() {
+            const container =
+                document.getElementById(
+                    "products-container"
+                );
+            /*
+             * Wait for Google Sheets
+             * products to load.
+             */
+            const loadedProducts =
+                await loadProducts();
+            /*
+             * Clear old products.
+             */
+            container.innerHTML = "";
+            /*
+             * Create product cards.
+             */
+            loadedProducts.forEach(
+                product => {
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+                    card.className =
+                        "product-card";
+                    /*
+                     * Use the newest image
+                     * coming from Google Sheets.
+                     */
+                    const productImage =
+                        product.image ||
+                        (
+                            Array.isArray(
+                                product.images
+                            )
+                                ? product.images[0]
+                                : ""
+                        );
+                    card.innerHTML = `
+                        <div
+                            class="product-image-wrapper"
+                        >
+                            <img
+                                src="${productImage}"
+                                alt="${product.name}"
+                                class="product-image"
+                            >
+                        </div>
+                        <div
+                            class="product-card-content"
+                        >
+                            <div
+                                class="product-symbol"
+                            >
+                                𓂀
+                            </div>
+                            <h3>
+                                ${product.name}
+                            </h3>
+                            <p
+                                class="product-price"
+                            >
+                                ${product.price} EGP
+                            </p>
+                            <a
+                                href="product.html?id=${product.id}"
+                                class="product-order-button"
+                            >
+                                ORDER NOW
+                            </a>
+                        </div>
+                    `;
+                    container.appendChild(
+                        card
+                    );
+                }
+            );
+        }
+        /*
+         * Start loading products.
+         */
+        displayProducts();
     </script>
 </body>
 </html>
