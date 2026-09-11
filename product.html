@@ -13,105 +13,113 @@
     >
     <style>
         /* =========================
-           PRODUCT GALLERY
+           PRODUCT IMAGE AREA
            ========================= */
         .product-images {
-            width: 100%;
+            width: 100% !important;
+            max-width: 450px !important;
+            margin: 0 auto !important;
         }
         .main-image-wrapper {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 45px;
+            position: relative !important;
+            width: 100% !important;
+            height: 420px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 20px !important;
+            overflow: hidden !important;
+            background: transparent !important;
         }
         #main-product-image {
-            width: 100%;
-            max-width: 420px;
-            max-height: 520px;
-            display: block;
-            object-fit: contain;
-            margin: 0 auto;
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 320px !important;
+            max-height: 380px !important;
+            object-fit: contain !important;
+            margin: auto !important;
+            background: transparent !important;
         }
         /* =========================
-           GALLERY ARROWS
+           ARROWS
            ========================= */
         .gallery-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 5;
-            width: 42px;
-            height: 42px;
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 10 !important;
+            width: 38px !important;
+            height: 38px !important;
+            padding: 0 !important;
+            margin: 0 !important;
             border: 1px solid rgba(
                 255,
                 255,
                 255,
-                0.3
-            );
+                0.35
+            ) !important;
             background: rgba(
                 0,
                 0,
                 0,
-                0.65
-            );
-            color: white;
-            font-size: 30px;
-            line-height: 35px;
-            cursor: pointer;
+                0.7
+            ) !important;
+            color: white !important;
+            font-size: 26px !important;
+            line-height: 35px !important;
+            cursor: pointer !important;
         }
         .gallery-prev {
-            left: 10px;
+            left: 5px !important;
         }
         .gallery-next {
-            right: 10px;
+            right: 5px !important;
         }
         /* =========================
            THUMBNAILS
            ========================= */
         .product-thumbnails {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            overflow-x: auto;
-            padding: 5px 0 10px;
-            justify-content: center;
+            display: flex !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            width: 100% !important;
+            margin-top: 10px !important;
+            overflow-x: auto !important;
+            padding: 5px !important;
         }
         .product-thumbnail {
-            width: 75px;
-            height: 75px;
-            flex: 0 0 75px;
-            object-fit: cover;
-            border: 1px solid #444;
-            cursor: pointer;
-            opacity: 0.55;
-            transition: 0.2s;
+            width: 60px !important;
+            height: 60px !important;
+            min-width: 60px !important;
+            object-fit: cover !important;
+            border: 1px solid #444 !important;
+            opacity: 0.55 !important;
+            cursor: pointer !important;
         }
         .product-thumbnail.active {
-            opacity: 1;
-            border-color: white;
+            opacity: 1 !important;
+            border-color: white !important;
         }
         /* =========================
-           COLOR / SIZE BUTTONS
+           COLOR / SIZE
            ========================= */
         #colors,
         #sizes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+            margin-top: 10px !important;
         }
         .option-button {
             width: auto !important;
-            min-width: 55px;
-            padding: 10px 16px !important;
+            min-width: 55px !important;
+            padding: 9px 15px !important;
             margin: 0 !important;
             background: transparent !important;
             color: white !important;
             border: 1px solid #555 !important;
-            cursor: pointer;
-            font-size: 14px;
+            cursor: pointer !important;
         }
         .option-button.active {
             background: white !important;
@@ -122,37 +130,39 @@
            MOBILE
            ========================= */
         @media (max-width: 768px) {
+            .product-images {
+                max-width: 360px !important;
+            }
             .main-image-wrapper {
-                padding: 10px 40px;
+                height: 350px !important;
+                padding: 15px 35px !important;
             }
             #main-product-image {
-                max-width: 90%;
-                max-height: 450px;
+                max-width: 240px !important;
+                max-height: 300px !important;
             }
             .gallery-arrow {
-                width: 38px;
-                height: 38px;
-                font-size: 26px;
-                line-height: 32px;
+                width: 34px !important;
+                height: 34px !important;
+                font-size: 24px !important;
+                line-height: 30px !important;
             }
             .gallery-prev {
-                left: 5px;
+                left: 3px !important;
             }
             .gallery-next {
-                right: 5px;
+                right: 3px !important;
             }
             .product-thumbnail {
-                width: 65px;
-                height: 65px;
-                flex-basis: 65px;
+                width: 55px !important;
+                height: 55px !important;
+                min-width: 55px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- =========================
-         HEADER
-         ========================= -->
+    <!-- HEADER -->
     <header>
         <a
             href="index.html"
@@ -185,14 +195,10 @@
             </button>
         </div>
     </header>
-    <!-- =========================
-         PRODUCT PAGE
-         ========================= -->
+    <!-- PRODUCT PAGE -->
     <main>
         <section class="product-page">
-            <!-- =========================
-                 PRODUCT IMAGE GALLERY
-                 ========================= -->
+            <!-- PRODUCT GALLERY -->
             <div class="product-images">
                 <div class="main-image-wrapper">
                     <button
@@ -220,9 +226,7 @@
                     class="product-thumbnails"
                 ></div>
             </div>
-            <!-- =========================
-                 PRODUCT INFORMATION
-                 ========================= -->
+            <!-- PRODUCT INFORMATION -->
             <div class="product-info">
                 <h1 id="product-name"></h1>
                 <p id="product-price"></p>
@@ -252,9 +256,7 @@
                         value="1"
                     >
                 </div>
-                <!-- =========================
-                     CUSTOMER DETAILS
-                     ========================= -->
+                <!-- CUSTOMER DETAILS -->
                 <div class="order-details">
                     <h2>
                         YOUR DETAILS
@@ -296,9 +298,7 @@
             </div>
         </section>
     </main>
-    <!-- =========================
-         FOOTER
-         ========================= -->
+    <!-- FOOTER -->
     <footer id="contact">
         <h2>
             SIMPLE
@@ -310,9 +310,6 @@
             Made with simplicity.
         </p>
     </footer>
-    <!-- =========================
-         JAVASCRIPT
-         ========================= -->
     <script src="products.js"></script>
     <script src="product.js"></script>
 </body>
