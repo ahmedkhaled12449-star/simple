@@ -1,10 +1,54 @@
-document.addEventListener("DOMContentLoaded", () => {
-    /* =========================
-       GET PRODUCT
-    ========================= */
-    const params = new URLSearchParams(window.location.search);
-    const productId = Number(params.get("id"));
-    const product = products.find(item => item.id === productId);
+document.addEventListener("DOMContentLoaded", async () => {
+    const PRODUCTS_API =
+        "https://script.google.com/macros/s/AKfycbyYkJOEZ7n_AMLWodcpc8QaA_4dV2f2UC7LA35XcgHdq4B13jp7-XkJYVPr_Qzac7cFZg/exec";
+    const params =
+        new URLSearchParams(window.location.search);
+    const productId =
+        Number(params.get("id"));
+    let product;
+    try {
+        const response =
+            await fetch(PRODUCTS_API);
+        const products =
+            await response.json();
+        product =
+            products.find(item => item.id === productId);
+    } catch (error) {
+        console.error(error);
+        document.body.innerHTML = `
+            <div style="
+                min-height:100vh;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#0b0b0b;
+                color:white;
+                font-family:Arial,sans-serif;
+                text-align:center;
+                padding:20px;
+            ">
+                <div>
+                    <h1>Unable to load product</h1>
+                    <p style="margin:20px 0;">
+                        Please try again later.
+                    </p>
+                    <a
+                        href="index.html"
+                        style="
+                            display:inline-block;
+                            padding:14px 25px;
+                            background:white;
+                            color:#111;
+                            text-decoration:none;
+                        "
+                    >
+                        BACK TO COLLECTION
+                    </a>
+                </div>
+            </div>
+        `;
+        return;
+    }
     if (!product) {
         document.body.innerHTML = `
             <div style="
@@ -40,18 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         return;
     }
-    /* =========================
-       PRODUCT INFORMATION
-    ========================= */
     document.getElementById("main-product-image").src =
         product.image;
     document.getElementById("product-name").textContent =
         product.name;
     document.getElementById("product-price").textContent =
         product.price + " EGP";
-    /* =========================
-       COLOR OPTIONS
-    ========================= */
     const colorsContainer =
         document.getElementById("colors");
     let selectedColor = "";
@@ -60,7 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.createElement("button");
         button.type = "button";
         button.textContent = color;
-        button.className = "option-button";
+        button.className =
+            "option-button";
         button.addEventListener("click", () => {
             document
                 .querySelectorAll("#colors .option-button")
@@ -72,9 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         colorsContainer.appendChild(button);
     });
-    /* =========================
-       SIZE OPTIONS
-    ========================= */
     const sizesContainer =
         document.getElementById("sizes");
     let selectedSize = "";
@@ -83,7 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.createElement("button");
         button.type = "button";
         button.textContent = size;
-        button.className = "option-button";
+        button.className =
+            "option-button";
         button.addEventListener("click", () => {
             document
                 .querySelectorAll("#sizes .option-button")
@@ -95,31 +132,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         sizesContainer.appendChild(button);
     });
-    /* =========================
-       ORDER FORM
-    ========================= */
     const form =
         document.getElementById("productOrderForm");
     const message =
         document.getElementById("order-message");
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        /* Check Color */
         if (!selectedColor) {
             message.textContent =
                 "Please choose a color.";
             return;
         }
-        /* Check Size */
         if (!selectedSize) {
             message.textContent =
                 "Please choose a size.";
             return;
         }
-        /* Get Quantity */
         const quantity =
             document.getElementById("quantity").value;
-        /* Collect Order Data */
         const data = {
             name:
                 document.getElementById("name").value.trim(),
@@ -140,10 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
             quantity:
                 quantity
         };
-        /* Google Apps Script */
         const scriptURL =
             "https://script.google.com/macros/s/AKfycbzE7EL_O87sfQySrm77THE1pndIaWizHCZyLdBzqs_11-GadO7hu2WmghuBQXzZehLDiQ/exec";
-        /* Loading */
         message.textContent =
             "Sending your order...";
         try {
@@ -155,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
             message.textContent =
                 "Order received successfully!";
             form.reset();
-            /* Reset selections */
             selectedColor = "";
             selectedSize = "";
             document
