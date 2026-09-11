@@ -518,3 +518,47 @@ footer p {
         font-size: 9px;
     }
 }
+/* =========================
+   PRODUCT STATUS BADGES
+   ========================= */
+
+.product-image-wrapper {
+    position: relative;
+}
+
+.product-status-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 5;
+
+    padding: 7px 12px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    background: rgba(0, 0, 0, 0.75);
+
+    backdrop-filter: blur(6px);
+
+    color: white;
+
+    border-radius: 2px;
+}
+
+.new-badge {
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+.soldout-badge {
+    background: rgba(120, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.sold-out-button {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
