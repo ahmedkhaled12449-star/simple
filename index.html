@@ -12,7 +12,9 @@
         href="style.css"
     >
 </head>
+
 <body>
+
     <!-- =========================
          HEADER
          ========================= -->
@@ -24,58 +26,74 @@
             <div class="logo-main">
                 SIMPLE
             </div>
+
             <div class="logo-hieroglyph">
                 𓋹𓅓𓊃𓏏𓃭
             </div>
         </a>
+
         <nav>
             <a href="#home">
                 Home
             </a>
+
             <a href="#collection">
                 Collection
             </a>
+
             <a href="#contact">
                 Contact
             </a>
         </nav>
+
         <div class="language">
             <button type="button">
                 EN
             </button>
+
             <button type="button">
                 AR
             </button>
         </div>
     </header>
+
+
     <!-- =========================
          MAIN
          ========================= -->
     <main>
+
         <!-- HERO -->
         <section
             id="home"
             class="hero"
         >
             <div class="hero-content">
+
                 <p class="small-title">
                     SIMPLE COLLECTION
                 </p>
+
                 <h1>
                     Simple.<br>
                     But Different.
                 </h1>
+
                 <p class="hero-description">
                     Discover our latest collection.
                 </p>
+
                 <a
                     href="#collection"
                     class="shop-button"
                 >
                     SHOP COLLECTION
                 </a>
+
             </div>
         </section>
+
+
         <!-- =========================
              COLLECTION
              ========================= -->
@@ -83,73 +101,103 @@
             id="collection"
             class="collection"
         >
+
             <div class="collection-heading">
+
                 <p class="collection-small-title">
                     THE COLLECTION
                 </p>
+
                 <h2>
                     OUR COLLECTION
                 </h2>
+
                 <span class="collection-symbol">
                     𓂀
                 </span>
+
             </div>
+
+
             <div
                 id="products-container"
             ></div>
+
         </section>
+
     </main>
+
+
     <!-- =========================
          FOOTER
          ========================= -->
     <footer id="contact">
+
         <h2>
             SIMPLE
         </h2>
+
         <div class="footer-hieroglyph">
             𓋹𓅓𓊃𓏏𓃭
         </div>
+
         <p>
             Made with simplicity.
         </p>
+
     </footer>
+
+
     <!-- =========================
          PRODUCT DATA
          ========================= -->
     <script src="products.js"></script>
+
+
     <!-- =========================
          MAIN SCRIPT
          ========================= -->
     <script>
+
         async function displayProducts() {
+
             const container =
                 document.getElementById(
                     "products-container"
                 );
+
+
             /*
              * Wait for Google Sheets
              * products to load.
              */
             const loadedProducts =
                 await loadProducts();
+
+
             /*
              * Clear old products.
              */
             container.innerHTML = "";
+
+
             /*
              * Create product cards.
              */
             loadedProducts.forEach(
                 product => {
+
                     const card =
                         document.createElement(
                             "div"
                         );
+
                     card.className =
                         "product-card";
+
+
                     /*
-                     * Use the newest image
-                     * coming from Google Sheets.
+                     * Product image
                      */
                     const productImage =
                         product.image ||
@@ -160,50 +208,142 @@
                                 ? product.images[0]
                                 : ""
                         );
-                    card.innerHTML = `
-                        <div
-                            class="product-image-wrapper"
-                        >
-                            <img
-                                src="${productImage}"
-                                alt="${product.name}"
-                                class="product-image"
-                            >
-                        </div>
-                        <div
-                            class="product-card-content"
-                        >
-                            <div
-                                class="product-symbol"
-                            >
-                                𓂀
+
+
+                    /*
+                     * Product status
+                     */
+                    const status =
+                        String(
+                            product.status ||
+                            "Available"
+                        )
+                        .trim()
+                        .toUpperCase();
+
+
+                    /*
+                     * Create status badge
+                     */
+                    let statusBadge = "";
+
+                    if (status === "NEW") {
+
+                        statusBadge = `
+                            <div class="product-status-badge new-badge">
+                                NEW
                             </div>
-                            <h3>
-                                ${product.name}
-                            </h3>
-                            <p
-                                class="product-price"
+                        `;
+
+                    } else if (
+                        status === "SOLD OUT"
+                    ) {
+
+                        statusBadge = `
+                            <div class="product-status-badge soldout-badge">
+                                SOLD OUT
+                            </div>
+                        `;
+
+                    }
+
+
+                    /*
+                     * Create order button
+                     */
+                    let orderButton = "";
+
+
+                    if (status === "SOLD OUT") {
+
+                        orderButton = `
+                            <span
+                                class="product-order-button sold-out-button"
                             >
-                                ${product.price} EGP
-                            </p>
+                                SOLD OUT
+                            </span>
+                        `;
+
+                    } else {
+
+                        orderButton = `
                             <a
                                 href="product.html?id=${product.id}"
                                 class="product-order-button"
                             >
                                 ORDER NOW
                             </a>
+                        `;
+
+                    }
+
+
+                    /*
+                     * Product card
+                     */
+                    card.innerHTML = `
+
+                        <div
+                            class="product-image-wrapper"
+                        >
+
+                            <img
+                                src="${productImage}"
+                                alt="${product.name}"
+                                class="product-image"
+                            >
+
+                            ${statusBadge}
+
                         </div>
+
+
+                        <div
+                            class="product-card-content"
+                        >
+
+                            <div
+                                class="product-symbol"
+                            >
+                                𓂀
+                            </div>
+
+
+                            <h3>
+                                ${product.name}
+                            </h3>
+
+
+                            <p
+                                class="product-price"
+                            >
+                                ${product.price} EGP
+                            </p>
+
+
+                            ${orderButton}
+
+                        </div>
+
                     `;
+
+
                     container.appendChild(
                         card
                     );
+
                 }
             );
+
         }
+
+
         /*
          * Start loading products.
          */
         displayProducts();
+
     </script>
+
 </body>
 </html>
