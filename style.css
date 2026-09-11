@@ -129,7 +129,8 @@ nav a:hover {
 ========================= */
 .collection {
     position: relative;
-    padding: 100px 6%;
+    /* زودنا المسافة فوق شوية */
+    padding: 125px 6% 100px;
     background-image:
         linear-gradient(
             rgba(0, 0, 0, 0.68),
@@ -180,8 +181,9 @@ nav a:hover {
     background: rgba(10, 10, 10, 0.82);
     border: 1px solid rgba(255, 255, 255, 0.15);
     overflow: hidden;
-    transition: transform 0.3s ease,
-                border-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
 }
 .product-card:hover {
     transform: translateY(-6px);
@@ -421,18 +423,43 @@ footer p {
         letter-spacing: -3px;
     }
     .collection {
-        padding: 75px 20px;
+        /* العنوان ينزل شوية */
+        padding: 105px 12px 75px;
     }
+    /* =========================
+       MOBILE PRODUCTS
+    ========================= */
     #products-container {
-        grid-template-columns: 1fr;
-        max-width: 360px;
+        /* منتجين جنب بعض */
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        width: 100%;
+        max-width: 100%;
+        gap: 12px;
         margin: auto;
     }
     .product-card {
         width: 100%;
     }
     .product-image-wrapper {
-        height: 430px;
+        /* تصغير الصورة عشان الكارتين يدخلوا */
+        height: 260px;
+    }
+    .product-card-content {
+        padding: 18px 8px 20px;
+    }
+    .product-card h3 {
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+    .product-price {
+        margin: 9px 0 15px;
+        font-size: 12px;
+    }
+    .product-order-button {
+        padding: 10px 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
     }
     .product-page {
         grid-template-columns: 1fr;
@@ -450,7 +477,9 @@ footer p {
         font-size: 42px;
     }
 }
-/* SMALL PHONES */
+/* =========================
+   SMALL PHONES
+========================= */
 @media (max-width: 450px) {
     .logo-main {
         font-size: 21px;
@@ -465,10 +494,27 @@ footer p {
     .small-title {
         letter-spacing: 3px;
     }
+    .collection {
+        /* مسافة إضافية بسيطة للموبايلات الصغيرة */
+        padding-top: 115px;
+    }
     .collection h2 {
         font-size: 24px;
     }
+    .collection-heading {
+        margin-bottom: 35px;
+    }
     .product-image-wrapper {
-        height: 400px;
+        height: 240px;
+    }
+    .product-card-content {
+        padding: 16px 6px 18px;
+    }
+    .product-card h3 {
+        font-size: 12px;
+    }
+    .product-order-button {
+        padding: 9px 10px;
+        font-size: 9px;
     }
 }
