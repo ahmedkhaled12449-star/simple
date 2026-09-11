@@ -564,144 +564,234 @@ footer p {
 }
 /* =========================
    SIMPLE BRAND STORY
-   PAPYRUS SECTION
    ========================= */
 
 .brand-story {
     width: 100%;
-    padding: 70px 6% 90px;
+    min-height: 650px;
+
+    padding: 90px 20px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(139, 105, 48, 0.08),
+            transparent 60%
+        );
 }
+
+
+/* =========================
+   PAPYRUS
+   ========================= */
 
 .papyrus {
     position: relative;
 
-    width: 100%;
-    max-width: 850px;
+    width: min(760px, 92%);
 
-    padding: 65px 70px;
+    padding: 70px 65px;
 
     text-align: center;
 
-    color: #211b12;
+    color: #241c10;
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(255,255,255,0.18),
-            transparent 28%
+            circle at 15% 20%,
+            rgba(255,255,255,0.22),
+            transparent 22%
         ),
         radial-gradient(
-            circle at 80% 75%,
-            rgba(90,55,20,0.10),
-            transparent 30%
+            circle at 85% 75%,
+            rgba(80,50,15,0.12),
+            transparent 28%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(100,70,25,0.025) 0px,
+            rgba(100,70,25,0.025) 1px,
+            transparent 1px,
+            transparent 5px
         ),
         linear-gradient(
             135deg,
-            #d9c28f,
-            #c8aa6b 45%,
-            #d8c08a
+            #d7bd82,
+            #c5a668,
+            #d8bf86
         );
 
-    border: 1px solid rgba(255,255,255,0.18);
-
     box-shadow:
-        0 25px 60px rgba(0,0,0,0.35),
-        inset 0 0 35px rgba(70,45,15,0.10);
+        0 30px 70px rgba(0,0,0,0.55),
+        0 8px 20px rgba(0,0,0,0.25),
+        inset 0 0 45px rgba(80,50,15,0.12);
 
-    overflow: hidden;
+    border-radius:
+        3px 7px 4px 5px;
+
+    transform: rotate(-0.25deg);
 }
 
 
-/* Papyrus edge effect */
+/* =========================
+   IRREGULAR PAPYRUS EDGES
+   ========================= */
 
-.papyrus::before,
+.papyrus::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: -7px;
+
+    width: 12px;
+
+    background:
+        repeating-linear-gradient(
+            180deg,
+            #b3955b 0px,
+            #d3b978 9px,
+            #b18f52 17px,
+            #d6bd82 27px
+        );
+
+    clip-path: polygon(
+        40% 0%,
+        75% 4%,
+        35% 9%,
+        80% 15%,
+        30% 22%,
+        75% 29%,
+        35% 37%,
+        80% 45%,
+        25% 53%,
+        75% 62%,
+        35% 70%,
+        80% 78%,
+        30% 87%,
+        75% 94%,
+        40% 100%
+    );
+}
+
 .papyrus::after {
     content: "";
 
     position: absolute;
 
-    left: 0;
-    right: 0;
+    top: 0;
+    bottom: 0;
+    right: -7px;
 
-    height: 12px;
+    width: 12px;
 
     background:
         repeating-linear-gradient(
-            90deg,
-            rgba(65,45,20,0.12) 0px,
-            rgba(65,45,20,0.12) 3px,
-            transparent 3px,
-            transparent 9px
+            180deg,
+            #b3955b 0px,
+            #d3b978 9px,
+            #b18f52 17px,
+            #d6bd82 27px
         );
 
-    opacity: 0.45;
+    clip-path: polygon(
+        60% 0%,
+        25% 4%,
+        65% 9%,
+        20% 15%,
+        70% 22%,
+        25% 29%,
+        65% 37%,
+        20% 45%,
+        75% 53%,
+        25% 62%,
+        65% 70%,
+        20% 78%,
+        70% 87%,
+        25% 94%,
+        60% 100%
+    );
 }
 
-.papyrus::before {
-    top: 0;
+
+/* =========================
+   DECORATIONS
+   ========================= */
+
+.papyrus-decoration {
+    font-size: 25px;
+
+    opacity: 0.75;
 }
 
-.papyrus::after {
-    bottom: 0;
+.papyrus-decoration.top {
+    margin-bottom: 18px;
+}
+
+.papyrus-decoration.bottom {
+    margin-top: 28px;
 }
 
 
-/* Top symbol */
-
-.papyrus-top-symbol {
-    font-size: 30px;
-    margin-bottom: 12px;
-
-    opacity: 0.85;
-}
-
-
-/* SIMPLE */
+/* =========================
+   TITLE
+   ========================= */
 
 .papyrus-title {
-    font-size: 42px;
+    font-size: 44px;
+
     font-weight: 700;
 
-    letter-spacing: 9px;
+    letter-spacing: 10px;
 
-    margin-left: 9px;
+    margin-left: 10px;
 }
-
-
-/* Egyptian inspired decoration */
 
 .papyrus-subtitle {
     margin-top: 10px;
 
-    font-size: 22px;
+    font-size: 21px;
 
     letter-spacing: 5px;
 
-    opacity: 0.85;
+    opacity: 0.8;
 }
 
 
-/* Divider */
+/* =========================
+   DIVIDER
+   ========================= */
 
 .papyrus-divider {
-    width: 90px;
+    width: 100px;
     height: 1px;
 
-    margin: 30px auto;
+    margin: 32px auto;
 
     background:
-        rgba(33,27,18,0.45);
+        linear-gradient(
+            to right,
+            transparent,
+            rgba(36,28,16,0.65),
+            transparent
+        );
 }
 
 
-/* Main Arabic headline */
+/* =========================
+   ARABIC STORY
+   ========================= */
 
 .papyrus h2 {
-    max-width: 700px;
+    max-width: 650px;
 
     margin: 0 auto;
 
@@ -712,53 +802,51 @@ footer p {
     font-weight: 600;
 }
 
-
-/* Highlight */
-
 .story-highlight {
-    margin: 8px auto 0;
+    max-width: 600px;
 
-    font-size: 20px;
+    margin: 10px auto 0;
+
+    font-size: 19px;
 
     line-height: 1.9;
 
     font-weight: 600;
 }
 
-
-/* Explanation */
-
 .story-text {
-    max-width: 650px;
+    max-width: 620px;
 
     margin: 25px auto 0;
 
     font-size: 15px;
 
-    line-height: 2.15;
+    line-height: 2.2;
 
     opacity: 0.82;
 }
 
 
-/* English */
+/* =========================
+   ENGLISH
+   ========================= */
 
 .story-english {
-    max-width: 600px;
-
-    margin: 28px auto 0;
+    margin-top: 30px;
 
     font-size: 12px;
 
     line-height: 2;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1.7px;
 
-    opacity: 0.72;
+    opacity: 0.68;
 }
 
 
-/* Ending */
+/* =========================
+   ENDING
+   ========================= */
 
 .story-ending {
     font-size: 17px;
@@ -766,8 +854,6 @@ footer p {
     font-weight: 700;
 
     letter-spacing: 4px;
-
-    margin-top: 5px;
 }
 
 
@@ -778,27 +864,27 @@ footer p {
 @media (max-width: 600px) {
 
     .brand-story {
-        padding: 45px 12px 65px;
+        min-height: auto;
+
+        padding: 65px 12px 75px;
     }
 
     .papyrus {
-        padding: 48px 22px;
-    }
+        width: 94%;
 
-    .papyrus-top-symbol {
-        font-size: 26px;
+        padding: 52px 25px;
     }
 
     .papyrus-title {
-        font-size: 31px;
+        font-size: 32px;
 
-        letter-spacing: 6px;
+        letter-spacing: 7px;
 
-        margin-left: 6px;
+        margin-left: 7px;
     }
 
     .papyrus-subtitle {
-        font-size: 18px;
+        font-size: 17px;
 
         letter-spacing: 3px;
     }
@@ -810,7 +896,7 @@ footer p {
     }
 
     .story-highlight {
-        font-size: 17px;
+        font-size: 16px;
 
         line-height: 1.9;
     }
@@ -833,5 +919,9 @@ footer p {
         font-size: 13px;
 
         letter-spacing: 2.5px;
+    }
+
+    .papyrus-decoration {
+        font-size: 21px;
     }
 }
