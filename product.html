@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>SIMPLE - Product</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-main">
+                SIMPLE
+            </div>
+            <div class="logo-hieroglyph">
+                𓋹𓅓𓊃𓏏𓃭
+            </div>
+        </a>
+        <nav>
+            <a href="index.html">
+                Home
+            </a>
+            <a href="index.html#collection">
+                Collection
+            </a>
+            <a href="index.html#contact">
+                Contact
+            </a>
+        </nav>
+        <div class="language">
+            <button type="button">
+                EN
+            </button>
+            <button type="button">
+                AR
+            </button>
+        </div>
+    </header>
+    <!-- PRODUCT PAGE -->
+    <main>
+        <section class="product-page">
+            <!-- PRODUCT IMAGE -->
+            <div class="product-images">
+                <img
+                    id="main-product-image"
+                    src=""
+                    alt="Product"
+                >
+            </div>
+            <!-- PRODUCT INFORMATION -->
+            <div class="product-info">
+                <h1 id="product-name"></h1>
+                <p id="product-price"></p>
+                <!-- COLOR -->
+                <div class="product-option">
+                    <h3>
+                        COLOR
+                    </h3>
+                    <div id="colors"></div>
+                </div>
+                <!-- SIZE -->
+                <div class="product-option">
+                    <h3>
+                        SIZE
+                    </h3>
+                    <div id="sizes"></div>
+                </div>
+                <!-- QUANTITY -->
+                <div class="product-option">
+                    <h3>
+                        QUANTITY
+                    </h3>
+                    <input
+                        type="number"
+                        id="quantity"
+                        min="1"
+                        value="1"
+                    >
+                </div>
+                <!-- CUSTOMER DETAILS -->
+                <div class="order-details">
+                    <h2>
+                        YOUR DETAILS
+                    </h2>
+                    <form id="productOrderForm">
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Full Name"
+                            required
+                        >
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Phone Number"
+                            required
+                        >
+                        <input
+                            type="text"
+                            id="governorate"
+                            placeholder="Governorate"
+                            required
+                        >
+                        <textarea
+                            id="address"
+                            placeholder="Full Address"
+                            required
+                        ></textarea>
+                        <button type="submit">
+                            SUBMIT ORDER
+                        </button>
+                    </form>
+                    <p id="order-message"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- FOOTER -->
+    <footer id="contact">
+        <h2>
+            SIMPLE
+        </h2>
+        <div class="footer-hieroglyph">
+            𓋹𓅓𓊃𓏏𓃭
+        </div>
+        <p>
+            Made with simplicity.
+        </p>
+    </footer>
+    <!-- PRODUCT DATA -->
+    <script src="products.js"></script>
+    <!-- PRODUCT PAGE SCRIPT -->
+    <script src="product.js"></script>
+</body>
+</html>
