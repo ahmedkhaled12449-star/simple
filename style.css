@@ -129,7 +129,6 @@ nav a:hover {
 ========================= */
 .collection {
     position: relative;
-    /* زودنا المسافة فوق شوية */
     padding: 125px 6% 100px;
     background-image:
         linear-gradient(
@@ -405,6 +404,30 @@ footer p {
     font-size: 13px;
 }
 /* =========================
+   SOCIAL LINKS
+========================= */
+.social-links {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+.social-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: opacity 0.3s ease;
+}
+.social-links a:hover {
+    opacity: 0.55;
+}
+.social-links span {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+}
+/* =========================
    MOBILE
 ========================= */
 @media (max-width: 800px) {
@@ -423,14 +446,10 @@ footer p {
         letter-spacing: -3px;
     }
     .collection {
-        /* العنوان ينزل شوية */
         padding: 105px 12px 75px;
     }
-    /* =========================
-       MOBILE PRODUCTS
-    ========================= */
+    /* MOBILE PRODUCTS */
     #products-container {
-        /* منتجين جنب بعض */
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
         width: 100%;
@@ -442,7 +461,6 @@ footer p {
         width: 100%;
     }
     .product-image-wrapper {
-        /* تصغير الصورة عشان الكارتين يدخلوا */
         height: 260px;
     }
     .product-card-content {
@@ -495,7 +513,6 @@ footer p {
         letter-spacing: 3px;
     }
     .collection {
-        /* مسافة إضافية بسيطة للموبايلات الصغيرة */
         padding-top: 115px;
     }
     .collection h2 {
@@ -520,64 +537,47 @@ footer p {
 }
 /* =========================
    PRODUCT STATUS BADGES
-   ========================= */
-
+========================= */
 .product-image-wrapper {
     position: relative;
 }
-
 .product-status-badge {
     position: absolute;
     top: 12px;
     left: 12px;
     z-index: 5;
-
     padding: 7px 12px;
-
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
-
     border: 1px solid rgba(255, 255, 255, 0.35);
-
     background: rgba(0, 0, 0, 0.75);
-
     backdrop-filter: blur(6px);
-
     color: white;
-
     border-radius: 2px;
 }
-
 .new-badge {
     border-color: rgba(255, 255, 255, 0.55);
 }
-
 .soldout-badge {
     background: rgba(120, 0, 0, 0.85);
     border-color: rgba(255, 255, 255, 0.45);
 }
-
 .sold-out-button {
     opacity: 0.55;
     cursor: not-allowed;
 }
 /* =========================
    SIMPLE BRAND STORY
-   ========================= */
-
+========================= */
 .brand-story {
     width: 100%;
     min-height: 650px;
-
     padding: 90px 20px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
-
     background:
         radial-gradient(
             ellipse at center,
@@ -585,23 +585,13 @@ footer p {
             transparent 60%
         );
 }
-
-
-/* =========================
-   PAPYRUS
-   ========================= */
-
+/* PAPYRUS */
 .papyrus {
     position: relative;
-
     width: min(760px, 92%);
-
     padding: 70px 65px;
-
     text-align: center;
-
     color: #241c10;
-
     background:
         radial-gradient(
             circle at 15% 20%,
@@ -626,34 +616,22 @@ footer p {
             #c5a668,
             #d8bf86
         );
-
     box-shadow:
         0 30px 70px rgba(0,0,0,0.55),
         0 8px 20px rgba(0,0,0,0.25),
         inset 0 0 45px rgba(80,50,15,0.12);
-
     border-radius:
         3px 7px 4px 5px;
-
     transform: rotate(-0.25deg);
 }
-
-
-/* =========================
-   IRREGULAR PAPYRUS EDGES
-   ========================= */
-
+/* IRREGULAR PAPYRUS EDGES */
 .papyrus::before {
     content: "";
-
     position: absolute;
-
     top: 0;
     bottom: 0;
     left: -7px;
-
     width: 12px;
-
     background:
         repeating-linear-gradient(
             180deg,
@@ -662,7 +640,6 @@ footer p {
             #b18f52 17px,
             #d6bd82 27px
         );
-
     clip-path: polygon(
         40% 0%,
         75% 4%,
@@ -681,18 +658,13 @@ footer p {
         40% 100%
     );
 }
-
 .papyrus::after {
     content: "";
-
     position: absolute;
-
     top: 0;
     bottom: 0;
     right: -7px;
-
     width: 12px;
-
     background:
         repeating-linear-gradient(
             180deg,
@@ -701,7 +673,6 @@ footer p {
             #b18f52 17px,
             #d6bd82 27px
         );
-
     clip-path: polygon(
         60% 0%,
         25% 4%,
@@ -720,62 +691,35 @@ footer p {
         60% 100%
     );
 }
-
-
-/* =========================
-   DECORATIONS
-   ========================= */
-
+/* DECORATIONS */
 .papyrus-decoration {
     font-size: 25px;
-
     opacity: 0.75;
 }
-
 .papyrus-decoration.top {
     margin-bottom: 18px;
 }
-
 .papyrus-decoration.bottom {
     margin-top: 28px;
 }
-
-
-/* =========================
-   TITLE
-   ========================= */
-
+/* TITLE */
 .papyrus-title {
     font-size: 44px;
-
     font-weight: 700;
-
     letter-spacing: 10px;
-
     margin-left: 10px;
 }
-
 .papyrus-subtitle {
     margin-top: 10px;
-
     font-size: 21px;
-
     letter-spacing: 5px;
-
     opacity: 0.8;
 }
-
-
-/* =========================
-   DIVIDER
-   ========================= */
-
+/* DIVIDER */
 .papyrus-divider {
     width: 100px;
     height: 1px;
-
     margin: 32px auto;
-
     background:
         linear-gradient(
             to right,
@@ -784,143 +728,82 @@ footer p {
             transparent
         );
 }
-
-
-/* =========================
-   ARABIC STORY
-   ========================= */
-
+/* ARABIC STORY */
 .papyrus h2 {
     max-width: 650px;
-
     margin: 0 auto;
-
     font-size: 25px;
-
     line-height: 1.9;
-
     font-weight: 600;
 }
-
 .story-highlight {
     max-width: 600px;
-
     margin: 10px auto 0;
-
     font-size: 19px;
-
     line-height: 1.9;
-
     font-weight: 600;
 }
-
 .story-text {
     max-width: 620px;
-
     margin: 25px auto 0;
-
     font-size: 15px;
-
     line-height: 2.2;
-
     opacity: 0.82;
 }
-
-
-/* =========================
-   ENGLISH
-   ========================= */
-
+/* ENGLISH */
 .story-english {
     margin-top: 30px;
-
     font-size: 12px;
-
     line-height: 2;
-
     letter-spacing: 1.7px;
-
     opacity: 0.68;
 }
-
-
-/* =========================
-   ENDING
-   ========================= */
-
+/* ENDING */
 .story-ending {
     font-size: 17px;
-
     font-weight: 700;
-
     letter-spacing: 4px;
 }
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
+/* BRAND STORY MOBILE */
 @media (max-width: 600px) {
-
     .brand-story {
         min-height: auto;
-
         padding: 65px 12px 75px;
     }
-
     .papyrus {
         width: 94%;
-
         padding: 52px 25px;
     }
-
     .papyrus-title {
         font-size: 32px;
-
         letter-spacing: 7px;
-
         margin-left: 7px;
     }
-
     .papyrus-subtitle {
         font-size: 17px;
-
         letter-spacing: 3px;
     }
-
     .papyrus h2 {
         font-size: 20px;
-
         line-height: 1.9;
     }
-
     .story-highlight {
         font-size: 16px;
-
         line-height: 1.9;
     }
-
     .story-text {
         font-size: 13px;
-
         line-height: 2.1;
     }
-
     .story-english {
         font-size: 10px;
-
         line-height: 1.9;
-
         letter-spacing: 1px;
     }
-
     .story-ending {
         font-size: 13px;
-
         letter-spacing: 2.5px;
     }
-
     .papyrus-decoration {
         font-size: 21px;
     }
