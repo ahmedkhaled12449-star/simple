@@ -1,52 +1,27 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
     const PRODUCTS_API =
         "https://script.google.com/macros/s/AKfycbyYkJOEZ7n_AMLWodcpc8QaA_4dV2f2UC7LA35XcgHdq4B13jp7-XkJYVPr_Qzac7cFZg/exec";
-
-
     const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
+        new URLSearchParams(window.location.search);
     const productId =
-        Number(
-            params.get("id")
-        );
-
-
+        Number(params.get("id"));
     let product;
-
-
     // =========================
     // LOAD PRODUCT
     // =========================
-
     try {
-
         const response =
             await fetch(
-                PRODUCTS_API
+                PRODUCTS_API + "?t=" + Date.now()
             );
-
-
         const products =
             await response.json();
-
-
         product =
             products.find(
-                item =>
-                    item.id === productId
+                item => Number(item.id) === productId
             );
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
+    } catch (error) {
+        console.error("Product loading error:", error);
         document.body.innerHTML = `
             <div style="
                 min-height:100vh;
@@ -59,17 +34,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 text-align:center;
                 padding:20px;
             ">
-
                 <div>
-
-                    <h1>
-                        Unable to load product
-                    </h1>
-
+                    <h1>Unable to load product</h1>
                     <p style="margin:20px 0;">
                         Please try again later.
                     </p>
-
                     <a
                         href="index.html"
                         style="
@@ -82,23 +51,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                     >
                         BACK TO COLLECTION
                     </a>
-
                 </div>
-
             </div>
         `;
-
         return;
-
     }
-
-
     // =========================
     // PRODUCT NOT FOUND
     // =========================
-
     if (!product) {
-
         document.body.innerHTML = `
             <div style="
                 min-height:100vh;
@@ -111,17 +72,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 text-align:center;
                 padding:20px;
             ">
-
                 <div>
-
-                    <h1>
-                        Product Not Found
-                    </h1>
-
+                    <h1>Product Not Found</h1>
                     <p style="margin:20px 0;">
                         This product does not exist.
                     </p>
-
                     <a
                         href="index.html"
                         style="
@@ -134,557 +89,331 @@ document.addEventListener("DOMContentLoaded", async () => {
                     >
                         BACK TO COLLECTION
                     </a>
-
                 </div>
-
             </div>
         `;
-
         return;
-
     }
-
-
     // =========================
-    // PRODUCT INFORMATION
+    // PRODUCT INFO
     // =========================
-
-    document.getElementById(
-        "product-name"
-    ).textContent =
+    document.getElementById("product-name").textContent =
         product.name;
-
-
-    document.getElementById(
-        "product-price"
-    ).textContent =
+    document.getElementById("product-price").textContent =
         product.price + " EGP";
-
-
     // =========================
-    // PRODUCT IMAGES
+    // IMAGES
     // =========================
-
     const mainImage =
-        document.getElementById(
-            "main-product-image"
-        );
-
-
+        document.getElementById("main-product-image");
     const thumbnails =
-        document.getElementById(
-            "product-thumbnails"
-        );
-
-
+        document.getElementById("product-thumbnails");
     const previousButton =
-        document.getElementById(
-            "gallery-prev"
-        );
-
-
+        document.getElementById("gallery-prev");
     const nextButton =
-        document.getElementById(
-            "gallery-next"
-        );
-
-
-    let images =
-        Array.isArray(product.images)
-            ? product.images
-            : [];
-
-
-    // Compatibility with old products
+        document.getElementById("gallery-next");
+    let images = [];
+    // Get images from API
+    if (Array.isArray(product.images)) {
+        images = product.images
+            .map(image => String(image).trim())
+            .filter(image => image.length > 0);
+    }
+    // Fallback to old single image
     if (
         images.length === 0 &&
         product.image
     ) {
-
         images = [
-            product.image
+            String(product.image).trim()
         ];
-
     }
-
-
+    console.log("PRODUCT:", product);
+    console.log("IMAGES:", images);
+    // =========================
+    // SHOW IMAGE
+    // =========================
     let currentImageIndex = 0;
-
-
     function showImage(index) {
-
-        if (
-            images.length === 0
-        ) {
+        if (images.length === 0) {
+            mainImage.style.display = "none";
             return;
         }
-
-
-        if (
-            index < 0
-        ) {
-
+        if (index < 0) {
             index =
                 images.length - 1;
-
         }
-
-
-        if (
-            index >= images.length
-        ) {
-
+        if (index >= images.length) {
             index = 0;
-
         }
-
-
         currentImageIndex =
             index;
-
-
         mainImage.src =
             images[currentImageIndex];
-
-
+        mainImage.style.display =
+            "block";
         document
-            .querySelectorAll(
-                ".product-thumbnail"
-            )
+            .querySelectorAll(".product-thumbnail")
             .forEach(
-                (thumbnail, i) => {
-
+                (thumbnail, thumbnailIndex) => {
                     thumbnail.classList.toggle(
                         "active",
-                        i === currentImageIndex
+                        thumbnailIndex === currentImageIndex
                     );
-
                 }
             );
-
     }
-
-
-    // Create thumbnails
-
+    // =========================
+    // CREATE THUMBNAILS
+    // =========================
     thumbnails.innerHTML = "";
-
-
     images.forEach(
         (image, index) => {
-
             const thumbnail =
-                document.createElement(
-                    "img"
-                );
-
-
+                document.createElement("img");
             thumbnail.src =
                 image;
-
-
             thumbnail.alt =
                 product.name;
-
-
             thumbnail.className =
                 "product-thumbnail";
-
-
             thumbnail.addEventListener(
                 "click",
                 () => {
-
-                    showImage(
-                        index
-                    );
-
+                    showImage(index);
                 }
             );
-
-
             thumbnails.appendChild(
                 thumbnail
             );
-
         }
     );
-
-
-    // Previous image
-
-    previousButton.addEventListener(
-        "click",
+    // =========================
+    // ARROWS
+    // =========================
+    previousButton.onclick =
         () => {
-
             showImage(
                 currentImageIndex - 1
             );
-
-        }
-    );
-
-
-    // Next image
-
-    nextButton.addEventListener(
-        "click",
+        };
+    nextButton.onclick =
         () => {
-
             showImage(
                 currentImageIndex + 1
             );
-
-        }
-    );
-
-
-    // Hide arrows if only one image
-
-    if (
-        images.length <= 1
-    ) {
-
+        };
+    // Hide arrows if one image
+    if (images.length <= 1) {
         previousButton.style.display =
             "none";
-
         nextButton.style.display =
             "none";
-
+    }
+    // Show thumbnails only when there
+    // is more than one image
+    if (images.length <= 1) {
         thumbnails.style.display =
             "none";
-
+    } else {
+        thumbnails.style.display =
+            "flex";
     }
-
-
-    // Show first image
-
+    // First image
     showImage(0);
-
-
-
     // =========================
     // COLORS
     // =========================
-
     const colorsContainer =
-        document.getElementById(
-            "colors"
-        );
-
-
+        document.getElementById("colors");
     let selectedColor = "";
-
-
-    product.colors.forEach(
+    const colors =
+        Array.isArray(product.colors)
+            ? product.colors
+            : [];
+    colorsContainer.innerHTML = "";
+    colors.forEach(
         color => {
-
             const button =
-                document.createElement(
-                    "button"
-                );
-
-
+                document.createElement("button");
             button.type =
                 "button";
-
-
             button.textContent =
                 color;
-
-
             button.className =
                 "option-button";
-
-
             button.addEventListener(
                 "click",
                 () => {
-
                     document
                         .querySelectorAll(
                             "#colors .option-button"
                         )
                         .forEach(
                             btn => {
-
                                 btn.classList.remove(
                                     "active"
                                 );
-
                             }
                         );
-
-
                     button.classList.add(
                         "active"
                     );
-
-
                     selectedColor =
                         color;
-
                 }
             );
-
-
             colorsContainer.appendChild(
                 button
             );
-
         }
     );
-
-
-
     // =========================
     // SIZES
     // =========================
-
     const sizesContainer =
-        document.getElementById(
-            "sizes"
-        );
-
-
+        document.getElementById("sizes");
     let selectedSize = "";
-
-
-    product.sizes.forEach(
+    const sizes =
+        Array.isArray(product.sizes)
+            ? product.sizes
+            : [];
+    sizesContainer.innerHTML = "";
+    sizes.forEach(
         size => {
-
             const button =
-                document.createElement(
-                    "button"
-                );
-
-
+                document.createElement("button");
             button.type =
                 "button";
-
-
             button.textContent =
                 size;
-
-
             button.className =
                 "option-button";
-
-
             button.addEventListener(
                 "click",
                 () => {
-
                     document
                         .querySelectorAll(
                             "#sizes .option-button"
                         )
                         .forEach(
                             btn => {
-
                                 btn.classList.remove(
                                     "active"
                                 );
-
                             }
                         );
-
-
                     button.classList.add(
                         "active"
                     );
-
-
                     selectedSize =
                         size;
-
                 }
             );
-
-
             sizesContainer.appendChild(
                 button
             );
-
         }
     );
-
-
-
     // =========================
     // ORDER FORM
     // =========================
-
     const form =
         document.getElementById(
             "productOrderForm"
         );
-
-
     const message =
         document.getElementById(
             "order-message"
         );
-
-
     form.addEventListener(
         "submit",
         async event => {
-
             event.preventDefault();
-
-
             if (!selectedColor) {
-
                 message.textContent =
                     "Please choose a color.";
-
                 return;
-
             }
-
-
             if (!selectedSize) {
-
                 message.textContent =
                     "Please choose a size.";
-
                 return;
-
             }
-
-
             const quantity =
                 document.getElementById(
                     "quantity"
                 ).value;
-
-
             const data = {
-
                 name:
                     document
-                        .getElementById(
-                            "name"
-                        )
+                        .getElementById("name")
                         .value
                         .trim(),
-
                 phone:
                     document
-                        .getElementById(
-                            "phone"
-                        )
+                        .getElementById("phone")
                         .value
                         .trim(),
-
                 governorate:
                     document
-                        .getElementById(
-                            "governorate"
-                        )
+                        .getElementById("governorate")
                         .value
                         .trim(),
-
                 address:
                     document
-                        .getElementById(
-                            "address"
-                        )
+                        .getElementById("address")
                         .value
                         .trim(),
-
                 product:
                     product.name,
-
                 price:
                     product.price,
-
                 color:
                     selectedColor,
-
                 size:
                     selectedSize,
-
                 quantity:
                     quantity
-
             };
-
-
             const scriptURL =
                 "https://script.google.com/macros/s/AKfycbzE7EL_O87sfQySrm77THE1pndIaWizHCZyLdBzqs_11-GadO7hu2WmghuBQXzZehLDiQ/exec";
-
-
             message.textContent =
                 "Sending your order...";
-
-
             try {
-
                 await fetch(
                     scriptURL,
                     {
-
-                        method:
-                            "POST",
-
-                        mode:
-                            "no-cors",
-
+                        method: "POST",
+                        mode: "no-cors",
                         body:
-                            JSON.stringify(
-                                data
-                            )
-
+                            JSON.stringify(data)
                     }
                 );
-
-
                 message.textContent =
                     "Order received successfully!";
-
-
                 form.reset();
-
-
                 selectedColor =
                     "";
-
                 selectedSize =
                     "";
-
-
                 document
                     .querySelectorAll(
                         ".option-button"
                     )
                     .forEach(
                         button => {
-
                             button.classList.remove(
                                 "active"
                             );
-
                         }
                     );
-
             }
-
-
             catch (error) {
-
-                console.error(
-                    error
-                );
-
-
+                console.error(error);
                 message.textContent =
                     "Something went wrong. Please try again.";
-
             }
-
         }
     );
-
 });
